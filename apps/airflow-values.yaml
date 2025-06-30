@@ -1,0 +1,21 @@
+executor: LocalExecutor
+webserver:
+  service:
+    type: ClusterIP
+  defaultUser:
+    enabled: true
+    username: airflow
+    password: airflow
+
+config:
+  AIRFLOW__CORE__LOAD_EXAMPLES: "false"
+  AIRFLOW__CORE__EXECUTOR: LocalExecutor
+
+dags:
+  path: /opt/airflow/dags
+  gitSync:
+    enabled: false
+
+logs:
+  persistence:
+    enabled: false

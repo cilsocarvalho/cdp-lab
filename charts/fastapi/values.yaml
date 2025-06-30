@@ -1,0 +1,20 @@
+image:
+  repository: famacil/fastapi
+  tag: latest
+  pullPolicy: IfNotPresent
+
+service:
+  type: ClusterIP
+  port: 8000
+
+ingress:
+  enabled: true
+  className: nginx
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+    nginx.ingress.kubernetes.io/ssl-redirect: "false"
+  hosts:
+  - host: fastapi.lab.local
+    paths:
+    - path: /
+      pathType: Prefix

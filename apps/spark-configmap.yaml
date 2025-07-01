@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: spark-app-cm
+  namespace: airflow
+data:
+  app.py: |
+    from pyspark.sql import SparkSession
+
+    spark = SparkSession.builder.appName("SimpleApp").getOrCreate()
+    data = [("Alice", 1), ("Bob", 2)]
+    df = spark.createDataFrame(data, ["name", "id"])
+    df.show()
+    spark.stop()

@@ -14,7 +14,12 @@ spec:
         - |
           export HOME=/tmp && \
           mkdir -p $HOME/.ivy2 && \
-          spark-submit --master local /opt/spark-apps/app.py
+          spark-submit \
+            --conf spark.jars.ivy=/tmp/.ivy2 \
+            --conf spark.jars.repositories= \
+            --conf spark.jars.packages='' \
+            --master local \
+            /opt/spark-apps/app.py
         volumeMounts:
         - name: spark-app
           mountPath: /opt/spark-apps

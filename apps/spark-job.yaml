@@ -2,6 +2,7 @@ apiVersion: batch/v1
 kind: Job
 metadata:
   name: spark-job
+  namespace: airflow
 spec:
   template:
     spec:
@@ -11,7 +12,7 @@ spec:
         command: [ "/bin/sh", "-c" ]
         args:
         - |
-          spark-submit --master local /opt/spark-apps/app.py
+          spark-submit --master local --conf spark.jars.ivy=/tmp/.ivy2 /opt/spark-apps/app.py
         volumeMounts:
         - name: spark-app
           mountPath: /opt/spark-apps
